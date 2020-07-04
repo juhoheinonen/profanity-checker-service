@@ -1,5 +1,7 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ProfanityCheckerService.Managers;
 
 namespace ProfanityCheckerService.Controllers
@@ -9,24 +11,25 @@ namespace ProfanityCheckerService.Controllers
     public class ProfanityCheckController : ControllerBase
     {
         private readonly IProfanityCheckManager _profanityCheckManager;
+        private readonly ILogger<ProfanityCheckController> _logger;
 
-        public ProfanityCheckController(IProfanityCheckManager profanityCheckManager)
+        public ProfanityCheckController(IProfanityCheckManager profanityCheckManager, ILogger<ProfanityCheckController> logger)
         {
             _profanityCheckManager = profanityCheckManager;
+            _logger = logger;
         }
 
         [HttpPost]
         public ActionResult<bool> Validate(string input)
         {
-            System.Diagnostics.Trace.WriteLine("Here");
-
             try
             {
                 var isValid = _profanityCheckManager.Validate(input);
                 return Ok(isValid);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
                 return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
         }

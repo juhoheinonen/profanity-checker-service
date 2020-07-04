@@ -1,35 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace ProfanityCheckerService.Managers
 {
     public class ProfanityCheckManager: IProfanityCheckManager
     {
+        private readonly ILogger<ProfanityCheckManager> _logger;
+
         // todo: think of better solution for word list.
         private List<string> _profanities;
 
-        public ProfanityCheckManager(string wordListPath = "")
+        public ProfanityCheckManager(ILogger<ProfanityCheckManager> logger)
         {
-            if (string.IsNullOrWhiteSpace(wordListPath))
-            {
-                wordListPath = "Content/list.txt";
-            }
+            _logger = logger;
 
+            var wordListPath = "Content/list.txt";
             _profanities = System.IO.File.ReadAllLines(wordListPath).Select(s => s.Trim()).ToList();
         }
 
-        public bool Validate([FromBody]string input)
+        public bool Validate(string input)
         {
-            System.Diagnostics.Trace.WriteLine("Before prepare: " + input);
+            _logger.LogDebug("Before prepare: " + input);
 
             var inputWords = InputTextPreparer.Prepare(input);
 
-            System.Diagnostics.Trace.WriteLine("After prepare.");
+            _logger.LogDebug("After prepare.");
 
             var profanitiesFound = _profanities.Any(p => inputWords.Contains(p));
 
-            System.Diagnostics.Trace.WriteLine("Result: " + !profanitiesFound);
+            _logger.LogDebug("Result: " + !profanitiesFound);
 
             if (profanitiesFound)
             {
