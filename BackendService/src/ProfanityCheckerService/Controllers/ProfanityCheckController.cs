@@ -20,11 +20,12 @@ namespace ProfanityCheckerService.Controllers
         }
 
         [HttpPost]
-        public ActionResult<bool> Validate(string input)
+        //[RequestSizeLimit(12582912)] // 12 Mb
+        public ActionResult<bool> Validate(ProfanityValidationInput input)
         {
             try
             {
-                var isValid = _profanityCheckManager.Validate(input);
+                var isValid = _profanityCheckManager.Validate(input.Content);
                 return Ok(isValid);
             }
             catch (Exception ex)
@@ -33,5 +34,10 @@ namespace ProfanityCheckerService.Controllers
                 return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
         }
+    }
+
+    public class ProfanityValidationInput
+    {
+        public string Content { get; set; }
     }
 }
