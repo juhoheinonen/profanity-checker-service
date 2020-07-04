@@ -15,7 +15,7 @@ namespace ProfanityCheckerService.Controllers
             _profanityCheckManager = profanityCheckManager;
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult<bool> Validate(string input)
         {
             try

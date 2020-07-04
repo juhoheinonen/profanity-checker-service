@@ -9,25 +9,39 @@ namespace ProfanityCheckerService.UnitTests
         [TestMethod]
         public void Validate_NoProfanitiesInInput_ReturnsTrue()
         {
-            var input = System.IO.File.ReadAllText("TestInput/validText.txt");
+            var files = System.IO.Directory.GetFiles("ValidTestInput");
 
-            var sut = new ProfanityCheckManager();
+            Assert.IsTrue(files.Length > 0);
 
-            var isValid = sut.Validate(input);
+            foreach (var file in files)
+            {
+                var input = System.IO.File.ReadAllText(file);
 
-            Assert.IsTrue(isValid);
+                var sut = new ProfanityCheckManager();
+
+                var isValid = sut.Validate(input);
+
+                Assert.IsTrue(isValid);
+            }
         }
 
         [TestMethod]
         public void Validate_ProfanitiesInInput_ReturnsFalse()
         {
-            var input = System.IO.File.ReadAllText("TestInput/invalidText.txt");
+            var files = System.IO.Directory.GetFiles("InvalidTestInput");
 
-            var sut = new ProfanityCheckManager();
+            Assert.IsTrue(files.Length > 0);
 
-            var isValid = sut.Validate(input);
+            foreach (var file in files)
+            {
+                var input = System.IO.File.ReadAllText(file);
 
-            Assert.IsFalse(isValid);
+                var sut = new ProfanityCheckManager();
+
+                var isValid = sut.Validate(input);
+
+                Assert.IsFalse(isValid);
+            }
         }
     }
 }
