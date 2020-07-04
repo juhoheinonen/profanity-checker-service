@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace ProfanityCheckerService.Managers
 {
@@ -8,10 +9,10 @@ namespace ProfanityCheckerService.Managers
     {
         public static ImmutableHashSet<string> Prepare(string input)
         {
-            // todo: more unit tests
             var textToCheck = (input ?? string.Empty).ToLowerInvariant().Trim();
 
-            // todo what do with foreign letters?
+            textToCheck = HttpUtility.HtmlDecode(textToCheck);
+
             var splitWords = Regex.Split(textToCheck, "([^a-zåäö0-9]|\\s)+");
 
             var onlyLettersAndDigits = splitWords.Select(s =>

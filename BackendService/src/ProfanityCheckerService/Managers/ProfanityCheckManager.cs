@@ -24,7 +24,6 @@ namespace ProfanityCheckerService.Managers
 
         public bool Validate(string input)
         {
-            // split input text by whitespaces and remove non alphanumeric letters from them
             var inputWords = InputTextPreparer.Prepare(input);
 
             var profanitiesFound = _profanities.Any(p => inputWords.Contains(p));
