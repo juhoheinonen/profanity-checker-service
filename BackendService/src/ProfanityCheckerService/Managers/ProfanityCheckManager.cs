@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ProfanityCheckerService.Managers
 {
@@ -18,11 +19,17 @@ namespace ProfanityCheckerService.Managers
             _profanities = System.IO.File.ReadAllLines(wordListPath).Select(s => s.Trim()).ToList();
         }
 
-        public bool Validate(string input)
+        public bool Validate([FromBody]string input)
         {
+            System.Diagnostics.Trace.WriteLine("Before prepare: " + input);
+
             var inputWords = InputTextPreparer.Prepare(input);
 
+            System.Diagnostics.Trace.WriteLine("After prepare.");
+
             var profanitiesFound = _profanities.Any(p => inputWords.Contains(p));
+
+            System.Diagnostics.Trace.WriteLine("Result: " + !profanitiesFound);
 
             if (profanitiesFound)
             {

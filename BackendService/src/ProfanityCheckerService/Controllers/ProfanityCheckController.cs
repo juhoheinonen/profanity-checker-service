@@ -18,6 +18,8 @@ namespace ProfanityCheckerService.Controllers
         [HttpPost]
         public ActionResult<bool> Validate(string input)
         {
+            System.Diagnostics.Trace.WriteLine("Here");
+
             try
             {
                 var isValid = _profanityCheckManager.Validate(input);
