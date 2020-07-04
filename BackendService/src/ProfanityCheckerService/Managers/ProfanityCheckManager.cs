@@ -5,15 +5,11 @@ namespace ProfanityCheckerService.Managers
 {
     public class ProfanityCheckManager: IProfanityCheckManager
     {
-        // todo: think of better solution for word  list.
-        // todo: implement caching
+        // todo: think of better solution for word list.
         private List<string> _profanities;
 
         public ProfanityCheckManager(string wordListPath = "")
         {
-            // todo: language guesser for English and Finnish?
-
-            // todo: think if better error handling would be good.
             if (string.IsNullOrWhiteSpace(wordListPath))
             {
                 wordListPath = "Content/list.txt";
