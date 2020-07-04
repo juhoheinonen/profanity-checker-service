@@ -1,0 +1,7 @@
+trigger UploadAttachmentTrigger on ContentDocumentLink (after insert) {
+    System.debug('attachment uploaded');
+    for (ContentDocumentLink cdl : trigger.new)	{                        
+        ID jobId = System.enqueueJob(new AsyncProfanityChecker(cdl));
+        System.debug('job id: ' + jobId);
+    }
+}
