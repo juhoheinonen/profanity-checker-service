@@ -16,7 +16,7 @@ namespace ProfanityCheckerService.Managers
             // todo: think if better error handling would be good.
             if (string.IsNullOrWhiteSpace(wordListPath))
             {
-                wordListPath = "~Content/list.txt";
+                wordListPath = "Content/list.txt";
             }
 
             _profanities = System.IO.File.ReadAllLines(wordListPath).Select(s => s.Trim()).ToList();

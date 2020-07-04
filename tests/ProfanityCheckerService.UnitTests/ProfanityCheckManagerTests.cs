@@ -11,7 +11,7 @@ namespace ProfanityCheckerService.UnitTests
         {
             var input = System.IO.File.ReadAllText("TestInput/validText.txt");
 
-            var sut = new ProfanityCheckManager("Content/list.txt");
+            var sut = new ProfanityCheckManager();
 
             var isValid = sut.Validate(input);
 
@@ -23,7 +23,7 @@ namespace ProfanityCheckerService.UnitTests
         {
             var input = System.IO.File.ReadAllText("TestInput/invalidText.txt");
 
-            var sut = new ProfanityCheckManager("Content/list.txt");
+            var sut = new ProfanityCheckManager();
 
             var isValid = sut.Validate(input);
 
