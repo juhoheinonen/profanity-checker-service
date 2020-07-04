@@ -1,4 +1,6 @@
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using ProfanityCheckerService.Managers;
 
 namespace ProfanityCheckerService.UnitTests
@@ -17,7 +19,9 @@ namespace ProfanityCheckerService.UnitTests
             {
                 var input = System.IO.File.ReadAllText(file);
 
-                var sut = new ProfanityCheckManager();
+                var logger = new Mock<ILogger<ProfanityCheckManager>>();
+
+                var sut = new ProfanityCheckManager(logger.Object);
 
                 var isValid = sut.Validate(input);
 
@@ -36,7 +40,9 @@ namespace ProfanityCheckerService.UnitTests
             {
                 var input = System.IO.File.ReadAllText(file);
 
-                var sut = new ProfanityCheckManager();
+                var logger = new Mock<ILogger<ProfanityCheckManager>>();
+
+                var sut = new ProfanityCheckManager(logger.Object);
 
                 var isValid = sut.Validate(input);
 

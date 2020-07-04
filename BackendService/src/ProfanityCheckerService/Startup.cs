@@ -24,7 +24,7 @@ namespace ProfanityCheckerService
         {
             services.AddScoped<IProfanityCheckManager, ProfanityCheckManager>();
             services.AddControllers();
-            services.AddLogging()
+            services.AddLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

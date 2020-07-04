@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using ProfanityCheckerService.Controllers;
 
 namespace ProfanityCheckerService.UnitTests
@@ -11,7 +13,9 @@ namespace ProfanityCheckerService.UnitTests
         [TestMethod]
         public void Validate_ManagerNull_ReturnsStatusCode500()
         {
-            var sut = new ProfanityCheckController(null);
+            var mockLogger = new Mock<ILogger<ProfanityCheckController>>();
+
+            var sut = new ProfanityCheckController(null, mockLogger.Object);
 
             var result = (IStatusCodeActionResult)sut.Validate("test").Result;
 
