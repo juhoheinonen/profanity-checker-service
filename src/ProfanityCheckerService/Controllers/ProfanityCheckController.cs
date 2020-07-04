@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProfanityCheckerService.Managers;
 
 namespace ProfanityCheckerService.Controllers
 {
@@ -13,16 +9,18 @@ namespace ProfanityCheckerService.Controllers
     public class ProfanityCheckController : ControllerBase
     {
         private readonly ILogger<ProfanityCheckController> _logger;
+        private readonly IProfanityCheckManager _profanityCheckManager;
 
-        public ProfanityCheckController(ILogger<ProfanityCheckController> logger)
+        public ProfanityCheckController(ILogger<ProfanityCheckController> logger, IProfanityCheckManager profanityCheckManager)
         {
             _logger = logger;
+            _profanityCheckManager = profanityCheckManager;
         }
 
         [HttpGet]
         public bool Validate(string input)
         {
-
+            return _profanityCheckManager.Validate(input);
         }
     }
 }
