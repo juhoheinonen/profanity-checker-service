@@ -25,5 +25,14 @@ namespace ProfanityCheckerService.UnitTests
                 Assert.IsTrue(output.Contains(expectedWord));
             }
         }
+
+        [TestMethod]
+        public void Prepare_InputNull_ReturnsZeroLengthValue()
+        {
+            var output = InputTextPreparer.Prepare(null);
+
+            Assert.IsNotNull(output);
+            Assert.AreEqual(0, output.Count);
+        }
     }
 }
