@@ -94,7 +94,10 @@ The key content must be used, otherwise the rest api method won't be able to rea
 
 Probably most straightforward way to install this application is to publish it using Visual Studio. Just open the solution in Visual Studio and right-click project ProfanityCheckerService and follow the steps to deploy the application to an Azure account. Of course, one needs an Azure account.
 
+Just right click publish, and follow instructions to deploy it to Azure account. You should select AppService as application type.
+
 #### Extra assignments
+After this, add site url as the remote site address in SalesForce (see Client app Deploying application instructions).
 
 ##### How to notify the user about deletion of attachment file?
 
