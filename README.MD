@@ -2,6 +2,8 @@
 
 ## Client application
 
+I haven't developed for SalesForce earlier, and I'm not sure if the application is packed in correct way. However, I started a developer SalesForce account and managed to add Apex trigger and class which are used when an attachment is uploaded for a case. Probably also other parts of the application which use attachments fire the trigger, but I haven't tested.
+
 ### Application structure
 
 The client application is in the repository under SalesForceClientApp folder. It consists of two files:
