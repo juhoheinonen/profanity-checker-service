@@ -20,7 +20,6 @@ namespace ProfanityCheckerService.Controllers
         }
 
         [HttpPost]
-        //[RequestSizeLimit(12582912)] // 12 Mb
         public ActionResult<bool> Validate(ProfanityValidationInput input)
         {
             try
