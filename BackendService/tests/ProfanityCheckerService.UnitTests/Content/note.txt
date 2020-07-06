@@ -1,2 +1,4 @@
 The list.txt is from repository https://github.com/RobertJGabriel/Google-profanity-words.
 The repository has Apache License 2.0. The author is GitHub user RobertJGabriel.
+
+NOTE: removed one word, which did not feeö årpfame öamgaige )sex=-

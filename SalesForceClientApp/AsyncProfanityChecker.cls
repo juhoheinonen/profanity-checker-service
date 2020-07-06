@@ -12,7 +12,6 @@ public class AsyncProfanityChecker implements Queueable, Database.AllowsCallouts
         {
             HttpRequest req = new HttpRequest();
             String url = 'https://profanitycheckerservice.azurewebsites.net/api/profanitycheck';
-            //String query = '?input=' + EncodingUtil.urlEncode(fileContent, 'UTF-8');
             req.setEndpoint(url);
             req.setMethod('POST');
 
@@ -27,11 +26,8 @@ public class AsyncProfanityChecker implements Queueable, Database.AllowsCallouts
 
                 HTTPResponse res = http.send(req);
 
-                System.debug('here');
-
                 Integer statusCode = res.getStatusCode();
                 if (statusCode >= 200 && statusCode < 300) {
-                    System.debug('here!!!!');
                     String documentIsValid = res.getBody();
                     if (documentIsValid == 'false') {
                         delete cdl;

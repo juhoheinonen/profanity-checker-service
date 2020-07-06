@@ -17,7 +17,7 @@ namespace ProfanityCheckerService.UnitTests
 
             var sut = new ProfanityCheckController(null, mockLogger.Object);
 
-            var result = (IStatusCodeActionResult)sut.Validate("test").Result;
+            var result = (IStatusCodeActionResult)sut.Validate(new ProfanityValidationInput { Content = "test" }).Result;
 
             Assert.AreEqual((int)HttpStatusCode.InternalServerError, result.StatusCode);
         }
