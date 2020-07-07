@@ -98,6 +98,8 @@ Just right click publish, and follow instructions to deploy it to Azure account.
 
 After this, add site url as the remote site address in SalesForce (see Client app Deploying application instructions).
 
+More detailed instructions on deploying the application are found in file backend_deploy.docx. 
+
 #### Extra assignments
 
 ##### How to notify the user about deletion of attachment file?
