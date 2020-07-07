@@ -50,7 +50,7 @@ Note. The toast message "1 file was added to Case." is shown even in case the fi
 
 Used technology: .NET Core Web Api, MsTest unit testing framework. .Net Core SDK version 3.1 needs to be installed on the machine the application is built and also where it is deployed.
 
-Validation for input text is very simple. If it contains any word in the list of profane words (introduced later), then the text is considered invalid. Currently supports only English, i.e. only a list of English profane words is used. Also, only words, not phrases are checked.
+Validation for input text is very simple. If it contains any word in the list of profane words (introduced later), then the text is considered invalid. Currently supports only English, i.e. only a list of English profane words is used. Also, only words, not phrases are checked. 
 
 Currently no authentication is implemented.
 
@@ -96,9 +96,16 @@ Probably most straightforward way to install this application is to publish it u
 
 Just right click publish, and follow instructions to deploy it to Azure account. You should select AppService as application type.
 
-#### Extra assignments
 After this, add site url as the remote site address in SalesForce (see Client app Deploying application instructions).
+
+#### Extra assignments
 
 ##### How to notify the user about deletion of attachment file?
 
+I studied this a bit and found out that it isn't possible to command directly a toast to show from Apex code. However, if a file is detected as invalid, probably a message of it could be sent to a queue. On the Salesforce client side code there could be a module that polls the queue and shows a toast message when a file was detected as inappropriate.
+
+Also I noticed, that if ContentDocumentLink was deleted in Apex code in early enough phase, then a red background toast telling of failing of adding attachment was shown. I'm not sure if this is a feasible option to notify the user, but probably it could be used.
+
 ##### How to handle files with bigger size than 12MB?
+
+I can think of such a possibility to read the file's content in Apex code and sending it in smaller chunks to backend service. Depending on file size, maybe they could be sent sequentially to the backend, and if just one chunk fails validation, then the process is stopped and the file is deleted.
